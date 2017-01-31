@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 
 import { Transaction } from '../../database';
+import { Adding } from '../adding/adding';
 
 /*
   Generated class for the Transactions page.
@@ -16,6 +17,8 @@ import { Transaction } from '../../database';
 export class Transactions {
 
   title : string = "Movimientos";
+  transactions : any;
+  addingPage = Adding;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {}
 
@@ -23,6 +26,16 @@ export class Transactions {
   	/*let transaction = new Transaction(20, "Primera transaccion");
   	transaction.save();*/
   	
+  	this.loadTransactions();
+  }
+
+  loadTransactions(){
+  	Transaction.all()
+  			   .then((resultados) => { 
+
+  			   	this.transactions = resultados
+  			   	console.log(this.transactions);
+  			   });
   }
 
 }

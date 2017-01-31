@@ -49,6 +49,12 @@ export class Transaction implements ITransaction {
 	save(){
 		return db.transactions.add(this);
 	}
+
+	static all(){
+		// Transaction.all() => Todas las transaccions
+		//Retorna promise
+		return db.transactions.orderBy("id").reverse().toArray();
+	}
 }
 
 export let db = new TransactionAppDB();
